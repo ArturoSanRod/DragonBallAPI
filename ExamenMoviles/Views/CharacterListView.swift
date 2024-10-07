@@ -12,7 +12,7 @@ struct CharacterListView: View {
     
     @State private var selectedRace: String = "Todos"
     
-    let races = ["Todos", "Saiyan", "Namekian", "Frieza", "Humanos"]
+    let races = ["Todos", "Saiyan", "Namekian", "Frieza Race", "Human"]
     
     var body: some View {
         NavigationView {
