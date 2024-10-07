@@ -195,6 +195,10 @@
 			);
 			mainGroup = 698EF2E02CB3E92000DC9A88;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				698EF3172CB3E95E00DC9A88 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				698EF3182CB3E97100DC9A88 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 698EF2EA2CB3E92000DC9A88 /* Products */;
 			projectDirPath = "";
@@ -558,6 +562,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		698EF3172CB3E95E00DC9A88 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.1;
+			};
+		};
+		698EF3182CB3E97100DC9A88 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = 698EF2E12CB3E92000DC9A88 /* Project object */;
 }
