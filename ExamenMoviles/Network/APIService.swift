@@ -12,8 +12,8 @@ class APIService {
         let urlString = "https://dragonball-api.com/api/characters?page=\(page)&limit=10"
         print("Buscando personajes desde la URL: \(urlString)") 
         guard let url = URL(string: urlString) else {
-            print("Invalid URL")
-            completion(.failure(NSError(domain: "Invalid URL", code: 404, userInfo: nil)))
+            print("URL inválida")
+            completion(.failure(NSError(domain: "URL inválida", code: 404, userInfo: nil)))
             return
         }
 
@@ -32,7 +32,7 @@ class APIService {
 
             do {
                 let result = try JSONDecoder().decode(CharacterResponse.self, from: data)
-                print("Éxito: \(result.items.count) characters")
+                print("Éxito: \(result.items.count) personajes")
                 completion(.success(result.items))
             } catch {
                 print("Error: \(error.localizedDescription)")
@@ -43,5 +43,5 @@ class APIService {
 }
 
 struct CharacterResponse: Decodable {
-    let items: [CharacterModel] // Lista de personajes
+    let items: [CharacterModel] 
 }

@@ -5,43 +5,49 @@
 //  Created by Arturo Sanchez on 07/10/24.
 //
 
-
 import SwiftUI
 
 struct CharacterListView: View {
     @StateObject var viewModel = CharacterViewModel(fetchCharactersUseCase: FetchCharactersUseCase(repository: CharacterRepository()))
-
+    
+    @State private var selectedRace: String = "Todos"
+    
+    let races = ["Todos", "Saiyan", "Namekian", "Frieza", "Humanos"]
+    
     var body: some View {
         NavigationView {
             VStack {
+                Picker("Selecciona Raza", selection: $selectedRace) {
+                    ForEach(races, id: \.self) { race in
+                        Text(race).tag(race)
+                    }
+                }
+                .pickerStyle(SegmentedPickerStyle())
+                .padding()
+
                 if viewModel.isLoading {
-                    ProgressView("Loading characters...")
+                    ProgressView("Cargando Personajes...")
                 } else if let errorMessage = viewModel.errorMessage {
                     Text("Error: \(errorMessage)").foregroundColor(.red)
                 } else {
-                    List(viewModel.characters) { character in
-                        VStack(alignment: .leading) {
-                            HStack {
-                                AsyncImage(url: URL(string: character.image)) { image in
-                                    image.resizable().scaledToFit().frame(width: 50, height: 50)
-                                } placeholder: {
-                                    ProgressView()
-                                }
-                                Text(character.name).font(.headline)
-                            }
-                            Text("Ki: \(character.ki)")
-                            Text("Max Ki: \(character.maxKi)")
-                            Text("Affiliation: \(character.affiliation)")
-                            // Mostrar el planeta del personaje
-                            Text("Planet: \(viewModel.getPlanetName(for: character))")
-                        }
+                    List(filteredCharacters) { character in
+                        CharacterCardView(character: character, planet: viewModel.getPlanetName(for: character))
                     }
-                    .navigationTitle("Characters")
+                    .listStyle(PlainListStyle())
+                    .navigationTitle("Personajes")
                     .onAppear {
                         viewModel.fetchCharacters()
                     }
                 }
             }
+        }
+    }
+    
+    var filteredCharacters: [CharacterModel] {
+        if selectedRace == "Todos" {
+            return viewModel.characters
+        } else {
+            return viewModel.characters.filter { $0.race == selectedRace }
         }
     }
 }

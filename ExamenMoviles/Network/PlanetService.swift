@@ -13,30 +13,30 @@ class PlanetService {
         let urlString = "https://dragonball-api.com/api/planets" 
         print("Fetching planets from URL: \(urlString)")
         guard let url = URL(string: urlString) else {
-            print("Invalid URL")
-            completion(.failure(NSError(domain: "Invalid URL", code: 404, userInfo: nil)))
+            print("URL inválido")
+            completion(.failure(NSError(domain: "URL inválido", code: 404, userInfo: nil)))
             return
         }
 
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
-                print("Error fetching planets: \(error.localizedDescription)")
+                print("Error: \(error.localizedDescription)")
                 completion(.failure(error))
                 return
             }
 
             guard let data = data else {
-                print("No data returned from the server")
-                completion(.failure(NSError(domain: "No Data", code: 500, userInfo: nil)))
+                print("No hubo información del servidor")
+                completion(.failure(NSError(domain: "Sin Data", code: 500, userInfo: nil)))
                 return
             }
 
             do {
                 let result = try JSONDecoder().decode(PlanetResponse.self, from: data)
-                print("Data successfully decoded: \(result.items.count) planets")
+                print("Éxito: \(result.items.count) planetas")
                 completion(.success(result.items))
             } catch {
-                print("Error decoding planet data: \(error.localizedDescription)")
+                print("Error: \(error.localizedDescription)")
                 completion(.failure(error))
             }
         }.resume()

@@ -28,7 +28,7 @@ class CharacterViewModel: ObservableObject {
     // Cargar personajes
     func fetchCharacters() {
         guard !isLastPage else {
-            print("No more characters to load.")
+            print("No hay mas personajes por cargar.")
             return
         }
 
@@ -68,15 +68,15 @@ class CharacterViewModel: ObservableObject {
 
     func getPlanetName(for character: CharacterModel) -> String {
         if character.race == "Saiyan" {
-            return planets.first(where: { $0.name == "Vegeta" })?.name ?? "Unknown Planet"
+            return planets.first(where: { $0.name == "Vegeta" })?.name ?? "Planeta Desconocido"
         } else if character.race == "Namekian" {
-            return planets.first(where: { $0.name == "Namek" })?.name ?? "Unknown Planet"
+            return planets.first(where: { $0.name == "Namek" })?.name ?? "Planeta Desconocido"
         } else if character.affiliation.contains("Z Fighter") {
-            return planets.first(where: { $0.name == "Tierra" })?.name ?? "Unknown Planet"
+            return planets.first(where: { $0.name == "Tierra" })?.name ?? "Planeta Desconocido"
         } else if character.race == "Frieza Race" {
-                        return planets.first(where: { $0.name == "Freezer No. 79" })?.name ?? "Unknown Planet"
+                        return planets.first(where: { $0.name == "Freezer No. 79" })?.name ?? "Planeta Desconocido"
         } else {
-            return "Unknown Planet"
+            return "Planeta Desconocido"
         }
     }
 
