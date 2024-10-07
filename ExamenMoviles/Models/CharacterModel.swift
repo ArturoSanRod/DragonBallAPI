@@ -18,6 +18,7 @@ struct CharacterModel: Identifiable, Decodable {
     let description: String
     let image: String
     let affiliation: String
+    let planetId: Int?
 }
 
 
